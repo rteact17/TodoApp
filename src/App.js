@@ -9,11 +9,13 @@ import UserFuncCmp from './User/userFuncComp';
 import HOCConsumer from './hoc/hocConsumer';
 import AnotherHOCConsumer from './hoc/anotherHocConsumer';
 import {BrowserRouter,Routes,Route,Link} from 'react-router-dom';
+import ApiComp from './apiComps/apiComp';
+import LazyComCOntainer from './lazyComps/lazyCOmp';
 
 class App extends React.Component {
   constructor() {
     super()
-    this.state = { todolist: '' };
+    this.state = { todolist: 0 };
   }
 
 
@@ -51,10 +53,20 @@ class App extends React.Component {
     localStorage.clear();
     console.log('unmouinting');
   }
+  inc = () =>{
+    this.setState({todolist:this.state.todolist+1});
+  }
 
   render() {
     console.log('render');
     return <div>
+      
+      <LazyComCOntainer count= {this.state.todolist}></LazyComCOntainer>
+      <br></br>
+      <button onClick={this.inc}>Inc App</button>
+      <p>APIS Start</p>
+      <ApiComp></ApiComp>
+      <p>APIS End</p>
       <AddTodo addTodo={this.btnClicked} ></AddTodo>
       <TodoList todolist={this.state.todolist}></TodoList>
       <UserFuncCmp ></UserFuncCmp>
